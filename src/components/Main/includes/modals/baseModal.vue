@@ -1,30 +1,37 @@
 <template>
-<div class="modal" v-if="activeModalOverlayToggled === 'baseModal' ? 'is-active' : '']">
-
-  <!-- Modal content -->
-  <div class="modal-content">
-    <span class="close" @click="resetActiveModalOverlay" :class="[ activeModalOverlayToggled === 'baseModal' ? 'modal-show' : 'modal']>&times;</span>
-    <p>Some text in the Modal..</p>
-    <p>{{someData}}</p>
+  <div
+    class="modal"
+    v-if="[activeModalOverlayToggled === 'baseModal' ? 'is-active' : '']"
+  >
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span
+        class="close"
+        @click="resetActiveModalOverlay"
+        :class="[
+          activeModalOverlayToggled === 'baseModal' ? 'modal-show' : 'modal'
+        ]"
+        >&times;</span
+      >
+      <p>Some text in the Modal..</p>
+      <p>{{ someData }}</p>
+    </div>
   </div>
-
-</div>
 </template>
 
 <script>
+import { activeModalToggle } from "@/components/Main/Mixins/activeModalToggle.js";
 
-    import { activeModalToggle } from "@/components/Main/Mixins/activeModalToggle.js";
-
-    export default {
-      name: "BasicModal",
-      mixins: [activeModalToggle, activeTabMixin],
-      props: ['someData'],
-      data() {
-        return {
-          data : null
-        };
-      }
+export default {
+  name: "BasicModal",
+  mixins: [activeModalToggle],
+  props: ["someData"],
+  data() {
+    return {
+      data: null
     };
+  }
+};
 </script>
 
 <style scoped>
@@ -37,8 +44,8 @@
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }
 
 .modal {
@@ -50,8 +57,8 @@
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }
 
 .modal-content {

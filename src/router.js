@@ -1,78 +1,59 @@
-import Vue from 'vue'
-import Router from 'vue-router'
+import Vue from "vue";
+import Router from "vue-router";
 //Special Hidden Routes
-import routes from '../specialRoutes/routes'
+import routes from "./specialRoutes/routes";
 //Dynamic prop passed to routes
-function dynamicPropsFn (route) {
-  const now = new Date()
+function dynamicPropsFn(route) {
+  const now = new Date();
   return {
-    name: (now.getFullYear() + parseInt(route.params.years)) + '!'
-  }
+    name: now.getFullYear() + parseInt(route.params.years) + "!"
+  };
 }
 
+import Home from "./views/Home";
+
 //lazy loading
-const Home = resolve => {
-  require.ensure(['./views/Home'], () => {
-    resolve(require('./views/Home'));
-  }, 'Home');
-};
+import Main from "./views/Main";
 
-const Main = resolve => {
-  require.ensure(['./views/Main'], () => {
-    resolve(require('./views/Main'));
-  }, 'Main');
-};
+import APIDrivenRoutes from "./views/APIDrivenRoutes";
+import pageOne from "./views/pageOne";
 
-const APIDrivenRoutes = resolve => {
-  require.ensure(['./views/APIDrivenRoutes'], () => {
-    resolve(require('./views/APIDrivenRoutes'));
-  }, 'APIDrivenRoutes');
-};
-
-
-const pageOne = resolve => {
-  require.ensure(['@/components/Main/pages/pageOne'], () => {
-    resolve(require('@/components/Main/pages/pageOne'));
-  }, 'Main');
-};
-
-
-
-routes
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/',
-      name: 'home',
+      path: "/",
+      name: "home",
       component: Home
     },
     {
-      path: '/about',
-      name: 'about',
+      path: "/about",
+      name: "about",
       props: dynamicPropsFn,
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+      component: () =>
+        import(/* webpackChunkName: "about" */ "./views/About.vue")
     },
     {
-      path: '/main',
+      path: "/main",
       component: Main,
-      children: [{
-          path: '',
-          name: 'pageOne',
+      children: [
+        {
+          path: "",
+          name: "pageOne",
           component: pageOne
-        }]
-      },
-      {
-        path: '/apiroutes',
-        component : APIDrivenRoutes,
-        children : routes
-      }
-    
+        }
+      ]
+    },
+    {
+      path: "/apiroutes",
+      component: APIDrivenRoutes,
+      children: routes
+    }
   ]
-})
+});

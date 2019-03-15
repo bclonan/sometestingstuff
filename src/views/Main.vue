@@ -1,9 +1,7 @@
 <template>
-
   <body>
-   <default-layout />
-   <base-modal>
-    
+    <default-layout />
+    <base-modal />
   </body>
 </template>
 
@@ -18,14 +16,9 @@ export default {
     "default-layout": DefaultLayout,
     "base-modal": baseModal
   },
-  methods : {
-  },
-  computed: {
-
-  }
+  methods: {},
+  computed: {}
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
